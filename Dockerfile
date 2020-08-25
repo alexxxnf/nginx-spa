@@ -1,9 +1,9 @@
-FROM alpine:3.9
+FROM alpine:3.12
 
 LABEL maintainer="Aleksey Maydokin <amaydokin@gmail.com>"
 
-ENV NGINX_VERSION 1.16.0
-ENV NGX_BROTLI_VERSION 0.1.2
+ENV NGINX_VERSION 1.19.2
+ENV NGX_BROTLI_VERSION 1.0.0rc
 ENV BROTLI_VERSION 1.0.7
 
 RUN set -x \
@@ -20,7 +20,7 @@ RUN set -x \
     && mkdir -p /usr/src \
 # dowload and extract source files
     && curl -LSs https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | tar xzf - -C /usr/src \
-    && curl -LSs https://github.com/eustas/ngx_brotli/archive/v$NGX_BROTLI_VERSION.tar.gz | tar xzf - -C /usr/src \
+    && curl -LSs https://github.com/google/ngx_brotli/archive/v$NGX_BROTLI_VERSION.tar.gz | tar xzf - -C /usr/src \
     && curl -LSs https://github.com/google/brotli/archive/v$BROTLI_VERSION.tar.gz | tar xzf - -C /usr/src \
 # ngx_brotli needs brotli files under its deps/brotli directory
     && rm -rf /usr/src/ngx_brotli-$NGX_BROTLI_VERSION/deps/brotli/ \
